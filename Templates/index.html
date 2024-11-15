@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Churn Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Churn Prediction</h1>
+        <form action="/predict" method="post">
+            <label>Enter Feature Values:</label><br>
+            <input type="text" name="CreditScore" placeholder="Credit Score" required><br>
+            <input type="text" name="Age" placeholder="Age" required><br>
+            <input type="text" name="Tenure" placeholder="Tenure" required><br>
+            <input type="text" name="Balance" placeholder="Balance" required><br>
+            <input type="text" name="NumOfProducts" placeholder="Number of Products" required><br>
+            <input type="text" name="EstimatedSalary" placeholder="Estimated Salary" required><br>
+
+            <label>Has Credit Card:</label><br>
+            <select name="HasCrCard" required>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select><br><br>
+
+            <label>Is Active Member:</label><br>
+            <select name="IsActiveMember" required>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select><br><br>
+
+            <label>Select Gender:</label><br>
+            <select name="Gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select><br><br>
+
+            <label>Select Geography:</label><br>
+            <select name="Geography" required>
+                <option value="France">France</option>
+                <option value="Germany">Germany</option>
+                <option value="Spain">Spain</option>
+            </select><br><br>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">
+            <h2>Predictions:</h2>
+            <ul>
+                {% for model, pred in prediction_text.items() %}
+                <li>{{ model }}: {{ pred }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
