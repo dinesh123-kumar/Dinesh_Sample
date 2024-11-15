@@ -4,6 +4,8 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
+
+
 # Initialize Flask app
 app = Flask(__name__)
 
@@ -95,4 +97,6 @@ def predict():
     return render_template('index.html', prediction_text=response)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get('PORT', 5000))  # Render provides 'PORT'
+    app.run(host='0.0.0.0', port=port)
